@@ -18,10 +18,14 @@ F = FormF(f,h);
 F = UpdateF(F, noord, oost, zuid, west);
 
 %Calculate F_
+F_ = dst(F);
 
 %Calculate U_
+[m,n] = size(F_);
+U_ = CalcU_(F_,m,n,h);
 
 %Calculate U
+U = idst(U_);
 
 end
 
