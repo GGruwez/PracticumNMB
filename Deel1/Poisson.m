@@ -8,10 +8,12 @@ h = 1/(N+1);
 x = 0:h:1;
 y = 0:h:1;
 [X,Y] = meshgrid(x,y);
+size(X);
 f = DefineFunc(X,Y);
 
 % Evalueer F
-F = FormF(f,h);
+[m,n] = size(X);
+F = FormF(f,h,m,n);
 
 % Update F
 [noord, oost, zuid, west] = DefineBoundary(x,y);
