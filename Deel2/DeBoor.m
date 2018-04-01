@@ -6,7 +6,7 @@ function [ z ] = DeBoor( t, c, y )
 
     function [ zed ] = db( t, d, x, j, k)
         % Deze functie stelt stap voor stap de driehoekige tabel op, hierbij
-        % worden de nieuwe c's (hier d genoemt) over de oude geschreven, zo
+        % worden de nieuwe c's (hier d genoemd) over de oude geschreven, zo
         % is er maar een vector nodig van lengte k+1.
         % Omdat we waarden overschrijven moeten we erop letten dat enkel
         % waarden die niet meer gebruikt moeten worden overschreven worden.
@@ -22,7 +22,7 @@ function [ z ] = DeBoor( t, c, y )
         zed = d(4);
     end
 
-    % In deze lussen wordt voor elke y-waarde het interval bepaalt waarbinnen ze ligt
+    % In deze lussen wordt voor elke y-waarde het interval bepaald waarbinnen ze ligt
     % en dan wordt db(t, d, x, j, k) opgeroepen om de bijhorende functiewaarde te vinden.
     z = zeros(size(y,1), size(c,2));
     for w = 1:size(c,2)
