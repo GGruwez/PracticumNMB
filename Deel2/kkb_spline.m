@@ -5,10 +5,10 @@ function [ c ] = kkb_spline( t, x, f )
 %   x = abscissen waarin f geevalueerd is (x elem. van [t(1), t(end)])
 %   f = matrix van functiewaarden in de abscissen van d functies
 
-    function [ M ] = bsplines( t, x )
+    function [ M ] = bsplines( t, x, k )
         % Stel de matrix M op met daarin n+k B-spline functies geevalueerd in de
         % abscissen  x.
-        orde = 4; % k+1 (k == 3)
+        orde = k+1; % k+1 (k == 3)
         nplusk = length(t) - 3;
         
         % Zoek in welk interval elke x zich bevindt.
