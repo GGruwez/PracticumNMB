@@ -22,8 +22,8 @@ function [ z ] = kkb_spline( t, x, f, y, k )
         % zich bevindt.
         J = zeros(length(x), 1);
         for i = 1:length(x)
-            %we hebben 2k knooppunten erbij gezet!
-            for j = orde:length(t)-orde
+            %we hebben 2k knooppunten erbij gezet && MATLAB begint vanaf 1
+            for j = (k+1):length(t)-(k+1)
                if x(i) >= t(j)
                    J(i) = j;
                else
@@ -39,9 +39,8 @@ function [ z ] = kkb_spline( t, x, f, y, k )
             M(i,J(i)) = 1;
         end
        
-        % Pas voor iedere x de 'efficiente evaluatie' van de B-splines toe.
-        % Dit is gebaseerd op de recursie-betrekking voor B-splines,
-        % het stelt ongeveer het omgekeerde op van de driehoekige tabel van de Boor.
+        % Pas voor iedere x de efficiënte evaluatie van de B-splines toe
+        % Gebaseerd op recursiebetrekking p120
         for i = 1:length(x)
             for k = 1:orde-1
                 for l = 0:k
@@ -55,8 +54,9 @@ function [ z ] = kkb_spline( t, x, f, y, k )
         end
     end
 
+
     M = bsplines(t, x, k);
-    % Los c op uit: f = Mc
+    % Los c op uit f = Mc
     c = M\f;
     
     %Evalueer via DeBoor

@@ -1,8 +1,11 @@
 function [ z ] = DeBoor( t, c, y, k )
-%DEBOOR Evalueer een aantal kkb's met bspline coefficienten in c, in elke y
-%  Het algoritme van de Boor wordt gebruikt om aan de hand van de recursie-formule
-%  voor B-splines, de B-splines met de opgegeven knooppunten (t) en coefficienten (c)
-%  te evalueren in elke opgegeven abscis (y).
+%DEBOOR Evalueer een splinefunctie met genormaliseerde B spline -
+%coefficienten in c, in elke y. Het algoritme van De Boor maakt gebruik van
+%de recursieformule op p123.
+%  t: de knooppunten
+%  c: de spline-coefficienten
+%  y: de opgegeven abscissen
+%  
 
     function [ zed ] = db( t, d, x, j, k)
         % Deze functie stelt stap voor stap de driehoekige tabel op, hierbij
