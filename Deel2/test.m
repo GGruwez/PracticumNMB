@@ -1,16 +1,17 @@
 x = 1:1:10;
-length(x)
+r = length(x);
 k = 3;
-t = 1:1:10 % minstens (n+2k+1) knooppunten nodig!
+t = 0:1:20; % minstens (n+2k+1) knooppunten nodig!
+length(t)
 orde = k+1;
-nplusk = length(t) - k;
+n_plus_k = length(t) - k;
 
 
 
 J = zeros(length(x), 1);
 
 for i = 1:length(x)
-    for j = (k+1):length(t)-k
+    for j = 1:length(t)
         if x(i) >= t(j)
             J(i) = j;
         else
@@ -19,3 +20,9 @@ for i = 1:length(x)
     end
 end
 J
+
+M = zeros(r, n_plus_k);
+for i = 1:length(J)
+  M(i,J(i)) = 1;
+end
+M
