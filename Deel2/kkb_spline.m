@@ -2,7 +2,7 @@ function [ z ] = kkb_spline( t, x, f, y, k )
 %KKB_SPLINE Bereken coefficienten voor een B-spline
 %kleinstekwadratenbenadering van f. Evalueer deze daarna ook via het
 %algoritme van De Boor.
-%   t = knooppuntenrij van lengte n voor de B-splines
+%   t = knooppuntenrij van lengte N voor de B-splines
 %   x = r abscissen waarin f geevalueerd is (x elem. van [t(1), t(end)])
 %   f = matrix van functiewaarden in de r abscissen van de functies
 %   y = vector van lengte N die de punten bevat waarin we de splinefunctie
@@ -12,18 +12,20 @@ function [ z ] = kkb_spline( t, x, f, y, k )
 %   in de punten y
 
 
+
     function [ M ] = bsplines( t, x, k )
         % Stel de matrix M op met daarin n+k B-spline functies geevalueerd in de
         % abscissen  x.
         orde = k+1;
         nplusk = length(t) - k;
+        r = length(x);
         
         % Return kolomvector J met voor elke J(i) het interval waarin x_i
         % zich bevindt.
-        J = zeros(length(x), 1);
-        for i = 1:length(x)
+        J = zeros(r, 1);
+        for i = 1:r
             %we hebben 2k knooppunten erbij gezet && MATLAB begint vanaf 1
-            for j = (k+1):length(t)-(k+1)
+            for j = (k+1):length(t)-k
                if x(i) >= t(j)
                    J(i) = j;
                else
@@ -34,15 +36,16 @@ function [ z ] = kkb_spline( t, x, f, y, k )
         
         % Initialiseer M met Nj,1(x) = 1
         % Dimensies van M: (r x (n+k))
-        M = zeros(length(x), nplusk);
+        M = zeros(r, nplusk);
         for i = 1:length(J)
             M(i,J(i)) = 1;
         end
        
         % Pas voor iedere x de efficiënte evaluatie van de B-splines toe
         % Gebaseerd op recursiebetrekking p120
-        for i = 1:length(x)
+        for i = 1:r
             for k = 1:orde-1
+                %driehoek
                 for l = 0:k
                     M(i,J(i)+l-k) = ...
                         (x(i) - t(J(i)+l-k)) / (t(J(i)+l) - t(J(i)+l-k))...
