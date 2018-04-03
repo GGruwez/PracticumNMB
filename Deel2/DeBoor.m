@@ -1,4 +1,4 @@
-function [ z ] = DeBoor( t, c, y )
+function [ z ] = DeBoor( t, c, y, k )
 %DEBOOR Evalueer een aantal kkb's met bspline coefficienten in c, in elke y
 %  Het algoritme van de Boor wordt gebruikt om aan de hand van de recursie-formule
 %  voor B-splines, de B-splines met de opgegeven knooppunten (t) en coefficienten (c)

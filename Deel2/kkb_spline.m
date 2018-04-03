@@ -1,4 +1,4 @@
-function [ c ] = kkb_spline( t, x, f )
+function [ z ] = kkb_spline( t, x, f, k, y )
 %KKB_SPLINE Bereken coefficienten voor een B-spline
 %kleinstekwadratenbenadering van f.
 %   t = knooppuntenrij voor de B-splines
@@ -48,5 +48,8 @@ function [ c ] = kkb_spline( t, x, f )
     M = bsplines(t, x);
     % Los c op uit: f = Mc
     c = M\f;
+    
+    %Evalueer via DeBoor
+    z = DeBoor( t, c, y, k );
 
 end
