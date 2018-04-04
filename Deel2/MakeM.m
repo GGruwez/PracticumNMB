@@ -5,6 +5,7 @@ function [ M ] = MakeM( t, x, k )
 % x = abscissen
 % k = graad
 
+  % n = aantal knooppunten
   orde = k+1;
   n_plus_k = length(t) - k;
   r = length(x);      
@@ -32,10 +33,10 @@ function [ M ] = MakeM( t, x, k )
  % Pas voor iedere x de efficiënte evaluatie van de B-splines toe
  % Gebaseerd op recursiebetrekking p120
  
- %voor elke x
+ %voor elke rij
  for i = 1:r
+    % recursieve driehoek
     for k = 1:orde-1
-        %itereer door de driehoek van boven naar onder
         for l = 0:k
             M(i,J(i)+l-k) = ...
             (x(i) - t(J(i)+l-k)) / (t(J(i)+l) - t(J(i)+l-k))...

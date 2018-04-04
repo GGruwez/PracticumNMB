@@ -5,7 +5,7 @@ function [ z ] = kkb_spline( t, x, f, y, k )
 %
 %
 %   t = knooppuntenrij van lengte N voor de B-splines
-%   x = r abscissen waarin f geevalueerd is (x elem. van [t(1), t(end)])
+%   x = r abscissen waarin f geevalueerd is, x elem van [t(1): t(end)]
 %   f = matrix van functiewaarden in de r abscissen van de functies
 %   y = vector van lengte N die de punten bevat waarin we de splinefunctie
 %   willen evalueren
@@ -15,8 +15,6 @@ function [ z ] = kkb_spline( t, x, f, y, k )
 
 
     %Stel M op.
-    %Er dient minstens één meetpunt (x) te liggen in het
-    %basisgebied van elke B-spline. 
     M = MakeM(t, x, k);
     
     % Los c op uit f = Mc
