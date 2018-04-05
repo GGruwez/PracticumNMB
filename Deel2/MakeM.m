@@ -7,7 +7,7 @@ function [ M ] = MakeM( t, x, k )
 
   % n = aantal knooppunten
   orde = k+1;
-  n_plus_k = length(t) - k;
+  n_plus_k = length(t) + k;
   r = length(x);      
         
   % Return kolomvector J met voor elke J(i) het interval waarin x_i
@@ -30,22 +30,7 @@ function [ M ] = MakeM( t, x, k )
     M(i,J(i)) = 1;
   end
   
- % Pas voor iedere x de efficiënte evaluatie van de B-splines toe
- % Gebaseerd op recursiebetrekking p120
  
- %voor elke rij
- for i = 1:r
-    % recursieve driehoek
-    for k = 1:orde-1
-        for l = 0:k
-            M(i,J(i)+l-k) = ...
-            (x(i) - t(J(i)+l-k)) / (t(J(i)+l) - t(J(i)+l-k))...
-                * M(i,J(i)+l-k) ...
-            + (t(J(i)+l+1) - x(i)) / (t(J(i)+l+1) - t(J(i)+l-k+1))...
-                * M(i,J(i)+l-k+1);
-         end
-    end
- end
     
  
 end
