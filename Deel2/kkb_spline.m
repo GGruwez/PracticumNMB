@@ -14,6 +14,7 @@ function [ z ] = kkb_spline( t, x, f, y, k )
 %   in de punten y
 
 
+    
     %Stel M op.
     M = MakeM(t, x, k);
     
@@ -21,8 +22,8 @@ function [ z ] = kkb_spline( t, x, f, y, k )
     % c bevat de n+k coefficienten horend bij elke B spline die de
     % vectorruimte van s(x) vormen
     c = M\f;
+    M(:,end) = [];
     
     %Evalueer via DeBoor
-    z = DeBoor( t, c, y, k );
 
 end

@@ -5,31 +5,40 @@ function [ M ] = MakeM( t, x, k )
 % x = abscissen
 % k = graad
 
-  % n = aantal knooppunten
-  orde = k+1;
-  n_plus_k = length(t) + k;
-  r = length(x);      
+    r = length(x)
+    orde = k+1; 
+    npk = length(t) - k;
         
-  % Return kolomvector J met voor elke J(i) het interval waarin x_i
-  % zich bevindt.
-  J = zeros(r, 1);
-  for i = 1:r
-    for j = 1:length(t)
-        if x(i) >= t(j)
-            J(i) = j;
-        else
-            break;
+    % P(i) is het interval waarin x(i) ligt.
+    P = zeros(r, 1);
+    for i = 1:r
+        for j = orde:length(t)-orde
+            if x(i) >= t(j)
+                P(i) = j;
+            else
+                break;
+            end
         end
-     end
-  end
-  
-  % Initialiseer M met Nj,1(x) = 1
-  % Dimensies van M: (r x (n+k))
-  M = zeros(r, n_plus_k);
-  for i = 1:length(J)
-    M(i,J(i)) = 1;
-  end
-  
+    end
+        
+    % Initialiseer M op de juiste plaatsen met Nj,1(x) = 1
+    M = zeros(r, npk);
+    for i = 1:length(P)
+         M(i,P(i)) = 1;
+    end
+       
+    %efficiënte evaluatie van Bsplines
+    for i = 1:r
+        for k = 1:orde-1
+            for l = 0:k
+                M(i,P(i)+l-k) = ...
+                    (x(i) - t(P(i)+l-k)) / (t(P(i)+l) - t(P(i)+l-k))...
+                        * M(i,P(i)+l-k) ...
+                    + (t(P(i)+l+1) - x(i)) / (t(P(i)+l+1) - t(P(i)+l-k+1))...
+                        * M(i,P(i)+l-k+1);
+            end
+        end
+    end
  
     
  

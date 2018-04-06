@@ -1,11 +1,20 @@
-function [ z ] = DeBoor( t, c, y, k )
-%DEBOOR Evalueer een splinefunctie met genormaliseerde B spline -
-%coefficienten in c, in elke y. Het algoritme van De Boor maakt gebruik van
-%de recursieformule op p123.
+function [ s ] = DeBoor(j, x, t, c, k)
+%DEBOOR 
 %  t: de knooppunten
 %  c: de spline-coefficienten
-%  y: de opgegeven abscissen
-%  
+%  x: de abscis waarin we het DB algoritme uitvoeren
+%  k: de graad van de spline
+%  j: het interval waarin x ligt
 
+ for r = 1:k+1
+    for l = k:-1:r-1
+        i = j-4+l;
+        alpha = (x - t(l+j-k)) / (t(l+1+j-r) - t(l+j-k))
+        c(l) = alpha * c(l) + (1-alpha) * c(l-1);
+    end
+ end
+
+ s = c(k);
  
+
 end
