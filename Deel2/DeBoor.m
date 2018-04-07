@@ -1,20 +1,25 @@
-function [ s ] = DeBoor(j, x, t, c, k)
+function [ s ] = DeBoor(y, t, c, k)
 %DEBOOR 
 %  t: de knooppunten
 %  c: de spline-coefficienten
-%  x: de abscis waarin we het DB algoritme uitvoeren
+%  y: de abscis waarin we de splines evalueren
 %  k: de graad van de spline
-%  j: het interval waarin x ligt
 
- for r = 1:k+1
-    for l = k:-1:r-1
-        i = j-4+l;
-        alpha = (x - t(l+j-k)) / (t(l+1+j-r) - t(l+j-k))
-        c(l) = alpha * c(l) + (1-alpha) * c(l-1);
+    s = zeros(length(y),1);
+    for i = 1:length(y)
+        j = FindInterval(y(i),t,k);
+        d = c;
+        dnew = zeros(length(d),1);
+        for m = 1:k
+            for n = j-k+m:j
+                alpha = (y(i) - t(n))/(t(n+k+1-m)-t(n));
+                dnew(n) = alpha*d(n) + (1-alpha)*d(n-1);
+            end
+            d = dnew;
+        end
+        s(i) = d(j);
     end
- end
-
- s = c(k);
- 
-
 end
+  
+
+

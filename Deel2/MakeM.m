@@ -7,9 +7,10 @@ function [ M ] = MakeM( t, x, k )
 
     r = length(x)
     orde = k+1; 
-    npk = length(t) - k;
+    npk1 = length(t) - k; 
+    
         
-    % P(i) is het interval waarin x(i) ligt.
+    %Form position matrix: P(i) is het interval waarin x(i) ligt.
     P = zeros(r, 1);
     for i = 1:r
         for j = orde:length(t)-orde
@@ -20,13 +21,15 @@ function [ M ] = MakeM( t, x, k )
             end
         end
     end
-        
+    P   
+   
     % Initialiseer M op de juiste plaatsen met Nj,1(x) = 1
-    M = zeros(r, npk);
+    M = zeros(r, npk1);
     for i = 1:length(P)
          M(i,P(i)) = 1;
     end
-       
+    M
+    
     %efficiënte evaluatie van Bsplines
     for i = 1:r
         for k = 1:orde-1
@@ -39,7 +42,7 @@ function [ M ] = MakeM( t, x, k )
             end
         end
     end
- 
+    M
     
  
 end
