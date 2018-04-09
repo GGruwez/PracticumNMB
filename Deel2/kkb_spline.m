@@ -19,7 +19,7 @@ function [ z ] = kkb_spline( t, x, f, y, k )
     M = MakeM(t, x, k);
     
     %npk1-1 --> M = (r x (n+k))
-    M(:,end) = [];
+    M(:,end) = []
     
     % Los c op uit f = Mc
     % c bevat de n+k coefficienten horend bij elke B spline die de

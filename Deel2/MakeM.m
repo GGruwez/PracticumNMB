@@ -21,14 +21,14 @@ function [ M ] = MakeM( t, x, k )
             end
         end
     end
-    P   
+    
    
     % Initialiseer M op de juiste plaatsen met Nj,1(x) = 1
     M = zeros(r, npk1);
     for i = 1:length(P)
          M(i,P(i)) = 1;
     end
-    M
+    
     
     %efficiënte evaluatie van Bsplines
     for i = 1:r
@@ -42,7 +42,7 @@ function [ M ] = MakeM( t, x, k )
             end
         end
     end
-    M
+    
     
  
 end
