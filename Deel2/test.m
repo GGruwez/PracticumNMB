@@ -4,7 +4,8 @@ a = @(x)x;
 f = a(x)';
 t = FormKnots(t,3);
 y = x;
-z = DeBoor(y, t, c, 3)
+k = 3; 
+z = kkb_spline(t, x, f, y, k)
 
 
 

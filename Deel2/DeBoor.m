@@ -18,12 +18,13 @@ function [ s ] = DeBoor(y, t, c, k)
             end
         end
         
+        %schrijf de oorpsronkelijke c's over
         d = c;
         dnew = zeros(length(d),1);
         
         %de boor triangle
         for m = 1:k
-            for n = j-k+m:j
+            for n = (j-k+m):j
                 alpha = (y(i) - t(n))/(t(n+k+1-m)-t(n));
                 dnew(n) = alpha*d(n) + (1-alpha)*d(n-1);
             end

@@ -9,15 +9,8 @@ z = kkb_spline( t, x, f, y, k );
 residu = f-z;
 
 
-figure
-subplot(2,2,1) 
+
 plot(x,z)
-title('KKB')
 
-subplot(2,2,2)
-plot(x,f)
-title('Original')
-
-subplot(2,2,3)
-plot(x,residu)
-title('Residu')
+%plot(x,f)
+%plot(x,residu)

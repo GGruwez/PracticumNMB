@@ -13,21 +13,18 @@ function [ z ] = kkb_spline( t, x, f, y, k )
 %   [z] = vector met lengte N met de functiewaarden van de splinebenadering
 %   in de punten y
     
-    N = length(y);
     
     %Stel M op.
     M = MakeM(t, x, k);
-    
-    %npk1-1 --> M = (r x (n+k))
-    M(:,end) = []
+        
     
     % Los c op uit f = Mc
     % c bevat de n+k coefficienten horend bij elke B spline die de
     % vectorruimte van s(x) vormen
     c = M\f;
     
-    %Evalueer de punten
-    z = DeBoor(y, t, c, k)
+    %Evalueer de splinefunctie in de gegeven y punten
+    z = DeBoor(y, t, c, k);
     
     
     
