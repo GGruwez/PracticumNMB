@@ -1,3 +1,1 @@
-%Exacte oplossing
-
-Poisson(10)
+PDE(8)

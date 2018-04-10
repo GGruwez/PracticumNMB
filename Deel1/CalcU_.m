@@ -1,6 +1,5 @@
 function [U_] = CalcU_(F_,m,n,h)
-%CALCU_ Summary of this function goes here
-%   Detailed explanation goes here
+%CALCU_ Calculate the transform of solution matrix U
 
 U_ = ones(m,n);
 for k = 1:m

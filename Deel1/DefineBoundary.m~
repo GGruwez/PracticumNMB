@@ -30,10 +30,10 @@ function [ noord, oost, zuid, west ] = DefineBoundary(x,y)
 %west = exp(y);
 
 % OPGAVE 3
-noord = 1 + 0*x + 0*y;
-oost = 2 + 0*x + 0*y;
-zuid = 2 + sin(pi*x/2) + 0*y;
-west = 3 + 0*x + 0*y;
+noord = exp(x+1);
+oost = exp(y+1);
+zuid = exp(x);
+west = exp(y);
 
 end
 
