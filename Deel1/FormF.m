@@ -1,6 +1,7 @@
 function F = FormF(f,h,m,n)
-%Returns the F matrix. 
+% Returns the F matrix. 
 %   F(i,j) = f(i,j)*h^2
+% f is given in matrix-form
 
 F = ones(m-2, n-2);
 
