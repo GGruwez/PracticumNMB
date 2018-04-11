@@ -2,28 +2,25 @@ function [ z ] = kkb_spline( t, x, f, y, k )
 %KKB_SPLINE Bereken coefficienten voor een B-spline
 %kleinstekwadratenbenadering van f. Evalueer deze daarna ook via het
 %algoritme van De Boor. 
-%   
-%
-%   t = knooppuntenrij van lengte N voor de B-splines
-%   x = r abscissen waarin f geevalueerd is, x elem van [t(1): t(end)]
+%   t = knooppuntenrij
+%   x = r abscissen waarin de Bsplines geevalueerd zijn. x(i) moet tussen
+%   de knooppunten liggen
 %   f = matrix van functiewaarden in de r abscissen van de functies
 %   y = vector van lengte N die de punten bevat waarin we de splinefunctie
 %   willen evalueren
-%   k = de graad van de splinefunctie (orde = k+1)
-%   [z] = vector met lengte N met de functiewaarden van de splinebenadering
+%   k = de graad van de Bsplines (orde = k+1)
+%   z = vector met lengte N met de functiewaarden van de splinebenadering
 %   in de punten y
     
     
     %Stel M op.
     M = MakeM(t, x, k);
-        
     
-    % Los c op uit f = Mc
-    % c bevat de n+k coefficienten horend bij elke B spline die de
-    % vectorruimte van s(x) vormen
+    % Los c op uit het overgedetermineerd stelsel (kkb). C bevat de
+    % coëfficiënten van de splinefunctie.
     c = M\f;
     
-    %Evalueer de splinefunctie in de gegeven y punten
+    %Evalueer de splinefunctie in de gegeven y punten.
     z = DeBoor(y, t, c, k);
     
     

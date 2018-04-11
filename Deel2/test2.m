@@ -1,10 +1,5 @@
-k = 3
-t = [0 1 2]
-
-
-
-voorstap = t(2)-t(1);
-a = t(1)-k*voorstap:voorstap:t(1)-voorstap
-eindstap = t(end) - t(end-1);
-b = (t(end)+voorstap):eindstap:t(end)+(k)*voorstap
-t = [a t b]
+x = linspace(-1,1,200);
+f = sin(20*x)./(100*x.^2 + 5);
+size(f)
+%f_ruis = f + 0.04*randn(size(x));
+%k = 3;
